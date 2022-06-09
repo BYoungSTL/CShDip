@@ -1,0 +1,44 @@
+@model DTO.ShoppingCart.ShoppingCartModel
+@{
+  Layout = "_Layout";
+}
+
+<div class="container">
+  <div class="card shadow p-3 mb-5 bg-body rounded justify-content-center w-100">
+    <div class="card-body">
+        <h4 class="card-title">@Model.UserName Заказ</h4>
+        <p>Статус заказа: @Model.Status</p>
+      @{
+          foreach (var product in Model.Products)
+          {
+              <div class="card shadow-sm p-3 mb-5 bg-body rounded justify-content-center">
+                  <div class="row g-0">
+                      <div class="col-md-2">
+                          <img src="@($"data:image/png;base64,{Convert.ToBase64String(product.Image)}")" class="img-fluid rounded-start" alt="...">
+                      </div>
+                      <div class="col-md-4">
+                          <div class="card-body">
+                              <h5 class="card-title">@product.Name</h5>
+                              @{
+                                  foreach (var characteristic in product.Characteristics)
+                                  {
+                                      <p>@characteristic.Name : @characteristic.Value</p>
+                                  }
+                              }
+                          </div>
+                      </div>
+                      <div class="col-md-4">
+                          <div class="card-body">
+                              <h6>@product.Price $</h6>
+                              <p>Описание: @product.Description</p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          }
+      }
+      <h5>Общая цена: @Model.Price</h5>
+      <button class="btn btn-outline-primary">К оплате</button>
+    </div>
+  </div>
+</div>

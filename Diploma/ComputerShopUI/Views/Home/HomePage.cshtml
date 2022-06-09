@@ -1,0 +1,114 @@
+@using DTO.Home
+@model HomePageViewModel
+@{
+    Layout = "_Layout";
+}
+
+<div class="container">
+    <div class="row mt-3">
+        <div class="row justify-content-around">
+            <div class="col-md-5">
+                <div class="col">
+                    <div class="card shadow-sm p-3 mb-5 bg-body rounded justify-content-center">
+                        <img src="~/assets/img/cpu1.jpg" alt=""/>
+                        <form asp-action="Catalog" asp-controller="Home" asp-route-category="CPU" asp-route-username="@Model.UserName">
+                            <div class="card-body">
+                                <button type="submit" class="btn btn-outline-primary w-100">Процессоры</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="col">
+                    <div class="card shadow-sm p-3 mb-5 bg-body rounded justify-content-center">
+                        <img src="~/assets/img/gpu1.jpg" alt=""/>
+                        <form asp-action="Catalog" asp-controller="Home" asp-route-category="GPU" asp-route-username="@Model.UserName">
+                            <div class="card-body">
+                                <button type="submit" class="btn btn-outline-primary w-100">Видеокарты</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-around">
+            <div class="col-md-5">
+                <div class="col">
+                    <div class="card shadow-sm p-3 mb-5 bg-body rounded justify-content-center">
+                        <img src="~/assets/img/motherboard2.jpg" alt=""/>
+                        <form asp-action="Catalog" asp-controller="Home" asp-route-category="Motherboard" asp-route-username="@Model.UserName">
+                            <div class="card-body">
+                                <a type="submit" class="btn btn-outline-primary w-100">Материнские платы</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="col">
+                    <div class="card shadow-sm p-3 mb-5 bg-body rounded justify-content-center">
+                        <img src="~/assets/img/disks1.png" alt=""/>
+                        <form asp-action="Catalog" asp-route-category="ROM" asp-controller="Home" asp-route-username="@Model.UserName">
+                            <div class="card-body">
+                                <a type="submit" class="btn btn-outline-primary w-100">Хранение данных</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-around">
+            <div class="col-md-5">
+                <div class="col">
+                    <div class="card shadow-sm p-3 mb-5 bg-body rounded justify-content-center">
+                        <img src="~/assets/img/ram1.jpg" alt=""/>
+                        <form asp-action="Catalog" asp-route-category="RAM" asp-route-username="@Model.UserName">
+                        <div class="card-body">
+                            <a type="submit" class="btn btn-outline-primary w-100">Оперативная память</a>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="col">
+                    <div class="card shadow-sm p-3 mb-5 bg-body rounded justify-content-center">
+                        <img src="~/assets/img/cooling1.jpg" alt=""/>
+                        <form asp-action="Catalog" asp-controller="Home" asp-route-category="Cooling" asp-route-username="@Model.UserName">
+                            <div class="card-body">
+                                <a type="submit" class="btn btn-outline-primary w-100">Охалждение</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-around">
+            <div class="col-md-5">
+                <div class="col">
+                    <div class="card shadow-sm p-3 mb-5 bg-body rounded justify-content-center">
+                        <img src="~/assets/img/bp2.jpg" alt=""/>
+                        <form asp-action="Catalog" asp-controller="Home" asp-route-category="Power Unit" asp-route-username="@Model.UserName">
+                            <div class="card-body">
+                                <a type="submit" class="btn btn-outline-primary w-100">Блоки питания</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="col">
+                    <div class="card shadow-sm p-3 mb-5 bg-body rounded justify-content-center">
+                        <img src="~/assets/img/corps1.jpg" alt=""/>
+                        <form asp-action="Catalog" asp-controller="Home" asp-route-category="Corps" asp-route-username="@Model.UserName">
+                            <div class="card-body">
+                                <a type="submit" class="btn btn-outline-primary w-100">Корпус</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

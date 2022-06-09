@@ -1,0 +1,137 @@
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" asp-append-version="true">
+
+<link href="~/assets/css/font-awesome.min.css" rel="stylesheet"/>
+
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+
+<link href="~/assets/ItemSlider/css/main-style.css" rel="stylesheet"/>
+
+<link href="~/assets/css/style.css" rel="stylesheet"/>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Computer Shop</title>
+</head>
+<body class="form-signin bg-white">
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+        <div class="col-md-8">
+            <a asp-action="HomePage" asp-route-username="@Model.UserName" class="navbar-brand" >Computer Shop</a>
+        </div>
+        <div class="col-md-4 d-flex justify-content-center">
+            @{
+                if (Model.UserName != null)
+                {
+                    <li>
+                        <a asp-action="UserPage" asp-controller="Home" asp-route-username="@Model.UserName" class="btn btn-light">@Model.UserName</a>    
+                    </li>
+                    <li>
+                        <a class="btn btn-light" href="#">Выход</a>    
+                    </li>
+                    <li>
+                        <a class="btn btn-light" href="#">Корзина</a>    
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        <a asp-action="Login" asp-controller="Account" class="btn btn-light" >Войти</a>    
+                    </li>
+                    <li>
+                        <a asp-action="Registration" asp-controller="Account" class="btn btn-light" >Регистрация</a>    
+                    </li>
+                }
+            }
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <form asp-action="SearchCatalog" class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
+        <button class="btn btn-outline-dark" type="submit">Поиск</button>
+    </form>
+</div>
+@RenderBody()
+
+<div class="col-md-12 footer-box">
+    <div class="row">
+        <div class="col-md-4">
+            <strong>Быстрая связь</strong>
+            <hr>
+            <form>
+                <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" required="required" placeholder="Name">
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" required="required" placeholder="Email address">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="form-group">
+                            <textarea name="message" id="message" required="required" class="form-control" rows="3" placeholder="Message"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-dark">Submit Request</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-4">
+            <strong>Контакты</strong>
+            <hr>
+            <p>
+                Belarus, Minsk, Pushkina street 8<br/>
+                Call: +375(29)-111-11-11<br>
+                Email: testemail@gmail.com<br>
+            </p>
+
+            2022 www.compshop-dip.com | All Right Reserved
+        </div>
+        <div class="col-md-4 social-box">
+            <strong>Мы в социальных сетях</strong>
+            <hr>
+            <a href="#">
+                <i class="fa fa-facebook-square fa-3x "></i>
+            </a>
+            <a href="#">
+                <i class="fa fa-twitter-square fa-3x "></i>
+            </a>
+            <a href="#">
+                <i class="fa fa-google-plus-square fa-3x c"></i>
+            </a>
+            <a href="#">
+                <i class="fa fa-linkedin-square fa-3x "></i>
+            </a>
+            <a href="#">
+                <i class="fa fa-pinterest-square fa-3x "></i>
+            </a>
+        </div>
+    </div>
+    <hr>
+</div>
+</body>
+
+<script src="~/assets/js/jquery-1.10.2.js"></script>
+
+<script src="~/assets/js/bootstrap.js"></script>
+<script src="~/assets/ItemSlider/js/modernizr.custom.63321.js"></script>
+<script src="~/assets/ItemSlider/js/jquery.catslider.js"></script>
+<script>
+        $(function () {
+
+            $('#mi-slider').catslider();
+
+        });
+		</script>

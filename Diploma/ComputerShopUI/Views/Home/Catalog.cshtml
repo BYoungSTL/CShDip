@@ -1,0 +1,46 @@
+@using DTO.Catalog
+
+@model CatalogPageViewModel
+
+@{
+    Layout = "_Layout";
+}
+
+
+<div class="container">
+    <h3>@Model.Category</h3>
+    @{
+        foreach (var product in Model.Products.Items)
+        {
+            <div class="card shadow-sm p-3 mb-5 bg-body rounded justify-content-center">
+                <div class="row g-0">
+                    <div class="col-md-2">
+                        <img src="@($"data:image/png;base64,{Convert.ToBase64String(product.Image)}")" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card-body">
+                            <h5 class="card-title">@product.Name</h5>
+                            @{
+                                foreach (var characteristic in product.Characteristics)
+                                {
+                                    <p>@characteristic.Name : @characteristic.Value</p>
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card-body">
+                            <h6>@product.Price $</h6>
+                            <p>Описание: @product.Description</p>
+                            <a asp-action="PostCatalog" asp-route-productName="@product.Name" asp-route-username="@Model.UserName" asp-route-category="@product.Category" class="btn btn-outline-primary">В корзину</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    <div class="d-flex justify-content-end mb-3">
+        <page-link page-list="@Model.PagedList" href="@Model.Category"></page-link>
+    </div>
+</div>
+

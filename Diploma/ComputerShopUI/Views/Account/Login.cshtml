@@ -1,0 +1,106 @@
+@using DTO.Login
+
+@model LoginEditModel
+@{
+    Layout = "_LayoutLoginPage";
+    ViewData["Title"] = "Login";
+    ViewData["MainTitle"] = "Welcome to Computer Shop";
+}
+<form method="post" asp-action="PostLogin" asp-controller="Account">
+<h3 class="text-center fw-bold mb-3">@ViewData["MainTitle"]</h3>
+
+<div class="text-danger text-center" asp-validation-summary="ModelOnly"></div>
+
+<input type="hidden" asp-for="@Model.ReturnUrl"/>
+<div class="form-floating mb-3">
+    <input type="text" asp-for="@Model.UserName" id="emailLogin" class="form-control" placeholder="Login" required>
+    <label asp-for="@Model.UserName">Login</label>
+    <span class="text-danger" asp-validation-for="@Model.UserName"></span>
+</div>
+<div class="form-floating mb-3">
+    <input type="password" asp-for="@Model.Password" id="passwordLogin" class="form-control" placeholder="Password" required>
+    <label asp-for="@Model.Password">Password</label>
+    <span class="text-danger" asp-validation-for="@Model.Password"></span>
+</div>
+<div class="form-check mb-3">
+    <input type="checkbox" asp-for="@Model.RememberMe" class="form-check-input">
+    <label asp-for="@Model.RememberMe" class="form-check-label ">Remember me</label>
+    <span class="text-danger" asp-validation-for="@Model.RememberMe"></span>
+</div>
+<button class="btn btn-lg btn-primary w-100" type="submit">Login</button>
+<button class="btn btn-lg btn-primary mt-3 w-100" type="submit">Registration</button>
+</form>
+<script>
+        var tokenKey = "accessToken";
+ 
+        // отпавка запроса к контроллеру AccountController для получения токена
+        async function getTokenAsync() {
+ 
+            // получаем данные формы и фомируем объект для отправки
+            const formData = new FormData();
+            formData.append("grant_type", "password");
+            formData.append("username", document.getElementById("emailLogin").value);
+            formData.append("password", document.getElementById("passwordLogin").value);
+ 
+            // отправляет запрос и получаем ответ
+            const response = await fetch("/token", {
+                method: "POST",
+                headers: {"Accept": "application/json"},
+                body: formData
+            });
+            // получаем данные 
+            const data = await response.json();
+ 
+            // если запрос прошел нормально
+            if (response.ok === true) {
+ 
+                // изменяем содержимое и видимость блоков на странице
+                document.getElementById("userName").innerText = data.username;
+                document.getElementById("userInfo").style.display = "block";
+                document.getElementById("loginForm").style.display = "none";
+                // сохраняем в хранилище sessionStorage токен доступа
+                sessionStorage.setItem(tokenKey, data.access_token);
+                console.log(data.access_token);
+             }
+            else {
+                // если произошла ошибка, из errorText получаем текст ошибки
+                console.log("Error: ", response.status, data.errorText);
+            }
+        };
+        // отправка запроса к контроллеру ValuesController
+        async function getData(url) {
+            const token = sessionStorage.getItem(tokenKey);
+ 
+            const response = await fetch(url, {
+                method: "GET",
+                headers: {
+                    "Accept": "application/json",
+                    "Authorization": "Bearer " + token  // передача токена в заголовке
+                }
+            });
+            if (response.ok === true) {
+                 
+                const data = await response.json();
+                alert(data)
+            }
+            else
+                console.log("Status: ", response.status);
+        }
+ 
+        // получаем токен
+        document.getElementById("submitLogin").addEventListener("click", e => {
+ 
+            e.preventDefault();
+            getTokenAsync();
+        });
+ 
+        // условный выход - просто удаляем токен и меняем видимость блоков
+        document.getElementById("logOut").addEventListener("click", e => {
+ 
+            e.preventDefault();
+            document.getElementById("userName").innerText = "";
+            document.getElementById("userInfo").style.display = "none";
+            document.getElementById("loginForm").style.display = "block";
+            sessionStorage.removeItem(tokenKey);
+        });
+    </script>
